@@ -31,4 +31,4 @@
 # is_installed(c(arm_from_cran, 'xaringan', 'blogdown', 'armcompanion', 'kableExtra', 'bakeoff'))
 # 
 
-# 
+# Pre requisites
