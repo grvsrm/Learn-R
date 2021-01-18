@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Hello my name is Gaurav S</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gaurav S" />
+    <meta name="date" content="2021-01-07" />
+    <script src="Day1_files/header-attrs/header-attrs.js"></script>
+    <link href="Day1_files/remark-css/default.css" rel="stylesheet" />
+    <link href="Day1_files/remark-css/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Hello my name is Gaurav S
+### Gaurav S
+### 2021-01-07
+
+---
+
+class: center, middle &lt;!-- # First slide starts from here --&gt;
+
+
+
+This is the first slide of this deck.
+---
+class: center, middle
+
+Now I am trying to write a few things on the second slide
+.left[I will try to write this in the left side of the slide]
+
+---
+class: middle
+
+.pull-left[
+
+```r
+---
+class: center, middle 
+# Hi there, with an image
+My name is Alison. I like hot toddies, 
+`#rdogladies`, and
+![Image of Momtocat](http://bit.ly/momtocat)  #&lt;&lt;
+---
+```
+
+]
+
+.pull-right[
+
+.center[.middle[
+# Hi there, with an image
+My name is Alison. I like hot toddies, 
+`#rdogladies`, and
+&lt;img class="lil" src="http://bit.ly/momtocat"&gt;
+]]
+]
+
+
+
+---
+title: "armdeck"
+output: xaringan::moon_reader 
+---
+# Introduce yourself!
+&gt; My name is Alison and I am a Data Scientist &amp; Professional Educator at RStudio. I live in Portland, Oregon with my husband, daughter, and our sourdough starter.
+---
+# Find me at...
+All the details...
+
+
+&lt;!-- introduce yourself here --&gt;
+
+Hello my name is Gaurav S!
+
+Say something about what you do, what you use R Markdown for, your favorite R package, etc.
+
+&lt;!-- include an image here, if you have a GitHub account use your profile pic! --&gt;
+
+![](https://github.com/grvsrm.png)&lt;!-- --&gt;
+
+
+
+&lt;!-- we make the data here --&gt;
+
+
+```r
+# getting the data
+namedata &lt;- babynames %&gt;%
+  filter(name == params$name1 | 
+           name == params$name2) %&gt;% 
+  filter(sex == "F") 
+```
+
+&lt;!-- get and see top years for each name --&gt;
+
+
+```r
+topyears &lt;- namedata %&gt;% 
+  group_by(name) %&gt;% 
+  top_n(1, prop) 
+```
+
+
+
+```r
+topyears %&gt;% 
+  filter(name == params$name1)
+```
+
+```
+## # A tibble: 0 x 5
+## # Groups:   name [0]
+## # ... with 5 variables: year &lt;dbl&gt;, sex &lt;chr&gt;, name &lt;chr&gt;, n &lt;int&gt;, prop &lt;dbl&gt;
+```
+
+
+
+```r
+topyears %&gt;% 
+  filter(name == params$name2)
+```
+
+```
+## # A tibble: 0 x 5
+## # Groups:   name [0]
+## # ... with 5 variables: year &lt;dbl&gt;, sex &lt;chr&gt;, name &lt;chr&gt;, n &lt;int&gt;, prop &lt;dbl&gt;
+```
+
+
+&lt;!-- plot name popularity over time --&gt;
+
+
+
+```r
+ggplot(namedata, 
+  aes(x = year, 
+      y = prop,  
+      group = name, 
+      color = name)) + 
+  geom_line() 
+```
+
+![](Day1_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+
+&lt;!-- where are you from? --&gt;
+
+
+
+```r
+# erase this chunk option if you want to include a map
+library(leaflet)
+leaflet() %&gt;% addTiles() %&gt;% setView(lat = 30.2621, lng = -97.7382, zoom = 17)
+```
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
